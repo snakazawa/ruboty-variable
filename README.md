@@ -20,8 +20,8 @@ And then execute:
 
 |Command|Pattern|Description|
 |:--|:--|:--|
-|[set_value](#usage)|/var (?\<key\>.+?) (?\<value\>.+?)z/|Set value|
-|[get_value](#usage)|/var (?\<key\>.+?)z/|Get value|
+|[set_value](#usage)|/var (?\<key\>\\S+?) (?\<value\>\\S+?)z/|Set value|
+|[get_value](#usage)|/var (?\<key\>\\S+?)z/|Get value|
 
 ## Usage
 * Set value and get value
