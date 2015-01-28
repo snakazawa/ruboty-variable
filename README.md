@@ -20,8 +20,8 @@ And then execute:
 
 |Command|Pattern|Description|
 |:--|:--|:--|
-|[set_value](#Usage)|/var (?<key>.+?) (?<value>.+?)z/|Set value|
-|[get_value](#Usage)|/var (?<key>.+?)z/|Get value|
+|[set_value](#usage)|/var (?\<key\>.+?) (?\<value\>.+?)z/|Set value|
+|[get_value](#usage)|/var (?\<key\>.+?)z/|Get value|
 
 ## Usage
 * Set value and get value
@@ -33,7 +33,6 @@ Set 3 to hoge
 3
 > ruboty var piyo
 Undefined piyo
-
 ~~~
 
 ## ENV
