@@ -8,7 +8,7 @@ module Ruboty
         end
 
         def set(key, value)
-          if @var.has_key?(key)
+          if @var.values.has_key?(key)
             message.reply("Overwrite #{value} to #{key}")
           else
             message.reply("Set #{value} to #{key}")
@@ -18,7 +18,7 @@ module Ruboty
         end
 
         def get(key)
-          if @var.has_key?(key)
+          if @var.values.has_key?(key)
             message.reply(@var.get(key))
           else
             message.reply("Undefined #{key}")
@@ -26,12 +26,32 @@ module Ruboty
         end
 
         def delete(key)
-          if @var.has_key?(key)
-            @var.delete(key)
+          if @var.values.has_key?(key)
+            @var.values.delete(key)
             message.reply("Deleted #{key}")
           else
             message.reply("Undefined #{key}")
           end
+        end
+
+        def list
+          if @var.values.empty?
+            message.reply('Variable is empty')
+          else
+            message.reply(variable_descriptions, code: true)
+          end
+        end
+
+        def variable_descriptions
+          key_len = [max_key_length, 'key'.size].max
+          mes = "%-#{key_len}s   value\n" % 'key'
+          mes << @var.values.map do |k, v|
+            "%-#{key_len}s - #{v}" % "#{k}"
+          end.join("\n")
+        end
+
+        def max_key_length
+          @var.values.keys.map(&:size).max
         end
       end
     end

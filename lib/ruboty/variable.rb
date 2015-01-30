@@ -11,19 +11,15 @@ module Ruboty
       end
 
       def set(key, value)
-        @values[key] = value
+        values[key] = value
       end
 
       def get(key)
-        @values[key] if @values.has_key?(key)
+        values[key] if values.has_key?(key)
       end
 
-      def delete(key)
-        @values.delete(key) if @values.has_key?(key)
-      end
-
-      def has_key?(key)
-        @values.has_key?(key)
+      def values
+        @values
       end
     end
   end
