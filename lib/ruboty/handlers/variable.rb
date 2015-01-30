@@ -1,4 +1,11 @@
 require "ruboty/variable/actions/variable"
+require "ruboty/variable/actions/set"
+require "ruboty/variable/actions/get"
+require "ruboty/variable/actions/delete"
+require "ruboty/variable/actions/list"
+require "ruboty/variable/actions/array_init"
+require "ruboty/variable/actions/array_push"
+require "ruboty/variable/actions/array_remove"
 
 module Ruboty
   module Handlers
@@ -12,84 +19,31 @@ module Ruboty
       on /var array remove (?<key>\S+?) (?<values>.+?)\z/, name: 'array_remove', description: 'Remove values from array'
 
       def get_value(message)
-        Ruboty::Variable::Actions::Variable.new(message).get(message[:key])
+        Ruboty::Variable::Actions::Get.new(message).call(message[:key])
       end
 
       def set_value(message)
-        Ruboty::Variable::Actions::Variable.new(message).set(message[:key], message[:value])
+        Ruboty::Variable::Actions::Set.new(message).call(message[:key], message[:value])
       end
 
       def delete_value(message)
-        Ruboty::Variable::Actions::Variable.new(message).delete(message[:key])
+        Ruboty::Variable::Actions::Delete.new(message).call(message[:key])
       end
 
       def list_values(message)
-        Ruboty::Variable::Actions::Variable.new(message).list()
+        Ruboty::Variable::Actions::List.new(message).call
       end
 
       def array_init(message)
-        Ruboty::Variable::Actions::Variable.new(message).array_init(message[:key])
+        Ruboty::Variable::Actions::ArrayInit.new(message).call(message[:key])
       end
 
       def array_push(message)
-        Ruboty::Variable::Actions::Variable.new(message).array_push(message[:key], message[:values])
+        Ruboty::Variable::Actions::ArrayPush.new(message).call(message[:key], message[:values])
       end
 
       def array_remove(message)
-        Ruboty::Variable::Actions::Variable.new(message).array_push(message[:key], message[:values])
-      end
-
-      on /var test\z/, name: 'test_values', hide: true
-
-      def test_values(message)
-        var = Ruboty::Variable::Actions::Variable.new(message)
-        puts '# set'
-        var.set("hoge", "hoge_value")
-        var.set("123457", "999")
-        var.set("aohef23", "awef8a23a3a32")
-        var.set("string", "string_value")
-
-        puts "\n# get"
-        var.get("hoge")
-        var.get("piyo")
-
-        puts "\n# list"
-        var.list
-
-        puts "\n# delete"
-        var.delete("hoge")
-        var.delete("hoge")
-        var.list
-
-        puts "\n# init array"
-        var.array_init("ary")
-        var.array_init("string")
-        var.array_init("string")
-        var.list
-
-        puts "\n# push array"
-        var.array_push("ary", "one")
-        var.array_push("ary", "two")
-        var.array_push("ary", "two")
-        var.list
-
-        puts "\n# push array to empty array"
-        var.array_push("hoge", "kkkk")
-        var.array_push("zxcv", "pppp")
-
-        puts "\n# push values to array"
-        var.array_push("ary", "three four five")
-        var.list
-
-        puts "\n# remove values from array"
-        var.array_remove("ary", "one three")
-        var.list
-
-        puts "\n# remove error"
-        var.array_remove("ary", "one three")
-        var.array_remove("noary", "one")
-        var.array_remove("123457", "one")
-        var.list
+        Ruboty::Variable::Actions::ArrayRemove.new(message).call(message[:key], message[:values])
       end
     end
   end
