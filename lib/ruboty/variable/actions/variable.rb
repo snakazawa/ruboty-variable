@@ -52,20 +52,38 @@ module Ruboty
         end
 
         def array_push(key, values)
-          values.split(/\s+/).each do |value|
-            case @var.type(key)
-              when 'array'
+          case @var.type(key)
+            when 'array'
+              values.split(/\s+/).each do |value|
                 if @var.array_include?(key, value)
                   message.reply("#{key} already included #{value}")
                 else
                   @var.array_push(key, value)
                   message.reply("Push #{value} to #{key}")
                 end
-              when nil
-                message.reply("Undefined #{key}")
-              else
-                message.reply("#{key} is not array type")
-            end
+              end
+            when nil
+              message.reply("Undefined #{key}")
+            else
+              message.reply("#{key} is not array type")
+          end
+        end
+
+        def array_remove(key, values)
+          case @var.type(key)
+            when 'array'
+              values.split(/\s+/).each do |value|
+                if @var.array_include?(key, value)
+                  @var.array_remove(key, value)
+                  message.reply("Remove #{value} from #{key}")
+                else
+                  message.reply("#{value} is not found in #{key}")
+                end
+              end
+            when nil
+              message.reply("Undefined #{key}")
+            else
+              message.reply("#{key} is not array type")
           end
         end
 

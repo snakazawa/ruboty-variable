@@ -36,6 +36,10 @@ module Ruboty
         values[key][:value] << value unless array_include?(key, value)
       end
 
+      def array_remove(key, value)
+        values[key][:value].delete(value) if array_include?(key, value)
+      end
+
       def array_include?(key, value)
         values[key][:value].include?(value) if type(key) == 'array'
       end
