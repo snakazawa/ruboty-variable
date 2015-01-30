@@ -44,14 +44,20 @@ module Ruboty
 
         def variable_descriptions
           key_len = [max_key_length, 'key'.size].max
-          mes = "%-#{key_len}s   value\n" % 'key'
+          type_len = [max_type_length, 'type'.size].max
+
+          mes = "%-#{key_len}s   %-#{type_len}s   value\n" % %w(key, type)
           mes << @var.values.map do |k, v|
-            "%-#{key_len}s - #{v}" % "#{k}"
+            "%-#{key_len}s - #{v[:type]} - #{v[:value]}" % "#{k}"
           end.join("\n")
         end
 
         def max_key_length
           @var.values.keys.map(&:size).max
+        end
+
+        def max_type_length
+          @var.values.values.map {|x| x[:type].size}.max
         end
       end
     end

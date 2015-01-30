@@ -11,11 +11,18 @@ module Ruboty
       end
 
       def set(key, value)
-        values[key] = value
+        values[key] = {
+            :type => 'string',
+            :value => value
+        }
       end
 
       def get(key)
-        values[key] if values.has_key?(key)
+        values[key][:value] if values.has_key?(key)
+      end
+
+      def type(key)
+        values[key][:type] if values.has_key?(key)
       end
 
       def values
