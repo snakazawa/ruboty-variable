@@ -33,7 +33,11 @@ module Ruboty
       end
 
       def array_push(key, value)
-        values[key][:value] << value if type(key) == 'array'
+        values[key][:value] << value unless array_include?(key, value)
+      end
+
+      def array_include?(key, value)
+        values[key][:value].include?(value) if type(key) == 'array'
       end
 
       def values

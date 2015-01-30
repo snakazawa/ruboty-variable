@@ -55,8 +55,12 @@ module Ruboty
           values.split(/\s+/).each do |value|
             case @var.type(key)
               when 'array'
-                @var.array_push(key, value)
-                message.reply("Push #{value} to #{key}")
+                if @var.array_include?(key, value)
+                  message.reply("#{key} already included #{value}")
+                else
+                  @var.array_push(key, value)
+                  message.reply("Push #{value} to #{key}")
+                end
               when nil
                 message.reply("Undefined #{key}")
               else
