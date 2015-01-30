@@ -32,6 +32,10 @@ module Ruboty
         }
       end
 
+      def array_push(key, value)
+        values[key][:value] << value if type(key) == 'array'
+      end
+
       def values
         @values
       end

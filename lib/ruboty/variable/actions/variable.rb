@@ -51,6 +51,20 @@ module Ruboty
           @var.array_init(key)
         end
 
+        def array_push(key, values)
+          values.split(/\s+/).each do |value|
+            case @var.type(key)
+              when 'array'
+                @var.array_push(key, value)
+                message.reply("Push #{value} to #{key}")
+              when nil
+                message.reply("Undefined #{key}")
+              else
+                message.reply("#{key} is not array type")
+            end
+          end
+        end
+
         def variable_descriptions
           key_len = [max_key_length, 'key'.size].max
           type_len = [max_type_length, 'type'.size].max
