@@ -2,28 +2,28 @@ module Ruboty
   module Variable
     module Actions
       class Variable < Ruboty::Actions::Base
-        NAMESPACE = 'variable'
+        def initialize(message)
+          super
+          @var = Ruboty::Variable::Variable.new(message)
+        end
 
         def set_value(key, value)
-          if values.has_key?(key)
+          if @var.values.has_key?(key)
             message.reply("Overwrite #{value} to #{key}")
           else
             message.reply("Set #{value} to #{key}")
           end
 
-          values[key] = value
+          @var.set_value(key, value)
         end
 
         def get_value(key)
-          if values.has_key?(key)
-            message.reply(values[key])
-          else
+          value = @var.values[key]
+          if value.nil?
             message.reply("Undefined #{key}")
+          else
+            message.reply(value)
           end
-        end
-
-        def values
-          message.robot.brain.data[NAMESPACE] ||= {}
         end
       end
     end
