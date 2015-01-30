@@ -38,6 +38,59 @@ module Ruboty
       def array_remove(message)
         Ruboty::Variable::Actions::Variable.new(message).array_push(message[:key], message[:values])
       end
+
+      on /var test\z/, name: 'test_values', hide: true
+
+      def test_values(message)
+        var = Ruboty::Variable::Actions::Variable.new(message)
+        puts '# set'
+        var.set("hoge", "hoge_value")
+        var.set("123457", "999")
+        var.set("aohef23", "awef8a23a3a32")
+        var.set("string", "string_value")
+
+        puts "\n# get"
+        var.get("hoge")
+        var.get("piyo")
+
+        puts "\n# list"
+        var.list
+
+        puts "\n# delete"
+        var.delete("hoge")
+        var.delete("hoge")
+        var.list
+
+        puts "\n# init array"
+        var.array_init("ary")
+        var.array_init("string")
+        var.array_init("string")
+        var.list
+
+        puts "\n# push array"
+        var.array_push("ary", "one")
+        var.array_push("ary", "two")
+        var.array_push("ary", "two")
+        var.list
+
+        puts "\n# push array to empty array"
+        var.array_push("hoge", "kkkk")
+        var.array_push("zxcv", "pppp")
+
+        puts "\n# push values to array"
+        var.array_push("ary", "three four five")
+        var.list
+
+        puts "\n# remove values from array"
+        var.array_remove("ary", "one three")
+        var.list
+
+        puts "\n# remove error"
+        var.array_remove("ary", "one three")
+        var.array_remove("noary", "one")
+        var.array_remove("123457", "one")
+        var.list
+      end
     end
   end
 end

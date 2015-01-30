@@ -66,7 +66,7 @@ Set 3 to hoge
 > ruboty var set piyo piyo_value
 Set piyo_value to piyo
 > ruboty var list
-key,   type     value
+key   type     value
 hoge - string - 3
 piyo - string - piyo_value
 ~~~
@@ -78,7 +78,7 @@ piyo - string - piyo_value
 > ruboty var array init ary
 Created ary empty array
 > ruboty var list
-key,   type    value
+key   type    value
 ary - array - []
 ~~~
 
@@ -94,7 +94,7 @@ Push one to ary
 Push two to ary
 Push three to ary
 > ruboty var list
-key,   type    value
+key   type    value
 ary - array - ["one", "two", "three"]
 ~~~
 
@@ -114,7 +114,7 @@ Push three to ary
 ary already included one
 ary already included two
 > ruboty var list
-key,   type    value
+key   type    value
 ary - array - ["one", "two", "three"]
 ~~~
 
