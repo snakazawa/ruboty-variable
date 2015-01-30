@@ -7,23 +7,23 @@ module Ruboty
       NAMESPACE = 'variable'
 
       def initialize(message)
-        @message = message
+        @values = message.robot.brain.data[NAMESPACE] ||= {}
       end
 
-      def set_value(key, value)
-        values[key] = value
+      def set(key, value)
+        @values[key] = value
       end
 
-      def get_value(key)
-        if values.has_key?(key)
-          nil
-        else
-          values[key]
-        end
+      def get(key)
+        @values[key] if @values.has_key?(key)
       end
 
-      def values
-        @message.robot.brain.data[NAMESPACE] ||= {}
+      def delete(key)
+        @values.delete(key) if @values.has_key?(key)
+      end
+
+      def has_key?(key)
+        @values.has_key?(key)
       end
     end
   end
