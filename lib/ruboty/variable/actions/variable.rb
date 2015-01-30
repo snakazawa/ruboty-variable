@@ -42,13 +42,22 @@ module Ruboty
           end
         end
 
+        def array_init(key)
+          if @var.type(key) == 'array'
+            message.reply("Clear #{key} array")
+          else
+            message.reply("Created #{key} empty array")
+          end
+          @var.array_init(key)
+        end
+
         def variable_descriptions
           key_len = [max_key_length, 'key'.size].max
           type_len = [max_type_length, 'type'.size].max
 
           mes = "%-#{key_len}s   %-#{type_len}s   value\n" % %w(key, type)
           mes << @var.values.map do |k, v|
-            "%-#{key_len}s - #{v[:type]} - #{v[:value]}" % "#{k}"
+            "%-#{key_len}s - %-#{type_len}s - #{v[:value]}" % [k, v[:type]]
           end.join("\n")
         end
 

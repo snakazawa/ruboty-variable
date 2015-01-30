@@ -25,6 +25,13 @@ module Ruboty
         values[key][:type] if values.has_key?(key)
       end
 
+      def array_init(key)
+        values[key] = {
+            :type => 'array',
+            :value => []
+        }
+      end
+
       def values
         @values
       end

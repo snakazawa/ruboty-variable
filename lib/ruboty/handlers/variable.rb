@@ -7,6 +7,8 @@ module Ruboty
       on /var get (?<key>\S+?)\z/, name: 'get_value', description: 'Get value'
       on /var delete (?<key>\S+?)\z/, name: 'delete_value', description: 'Delete value'
       on /var list\z/, name: 'list_values', description: 'Show values list'
+      on /var array init (?<key>\S+?)\z/, name: 'array_init', description: 'Create empty array or clear array'
+      on /var array push (?<key>\S+?) (?<value>\S+?)\z/, name: 'array_push', description: 'Push value to array'
 
       def get_value(message)
         Ruboty::Variable::Actions::Variable.new(message).get(message[:key])
@@ -22,6 +24,10 @@ module Ruboty
 
       def list_values(message)
         Ruboty::Variable::Actions::Variable.new(message).list()
+      end
+
+      def array_init(message)
+        Ruboty::Variable::Actions::Variable.new(message).array_init(message[:key])
       end
     end
   end
