@@ -43,6 +43,7 @@ Set 3 to hoge
 ~~~
 > ruboty var set hoge 3
 Set 3 to hoge
+
 > ruboty var get hoge
 3
 ~~~
@@ -53,6 +54,7 @@ Set 3 to hoge
 ~~~
 > ruboty var set hoge 3
 Set 3 to hoge
+
 > ruboty var delete hoge
 Deleted hoge
 ~~~
@@ -63,10 +65,12 @@ Deleted hoge
 ~~~
 > ruboty var set hoge 3
 Set 3 to hoge
+
 > ruboty var set piyo piyo_value
 Set piyo_value to piyo
+
 > ruboty var list
-key   type     value
+key    type     value
 hoge - string - 3
 piyo - string - piyo_value
 ~~~
@@ -77,6 +81,7 @@ piyo - string - piyo_value
 ~~~
 > ruboty var array init ary
 Created ary empty array
+
 > ruboty var list
 key   type    value
 ary - array - []
@@ -88,11 +93,14 @@ ary - array - []
 ~~~
 > ruboty var array init ary
 Created ary empty array
+
 > ruboty var array push ary one
 Push one to ary
+
 > ruboty var array push ary two three
 Push two to ary
 Push three to ary
+
 > ruboty var list
 key   type    value
 ary - array - ["one", "two", "three"]
@@ -104,18 +112,22 @@ ary - array - ["one", "two", "three"]
 ~~~
 > ruboty var array init ary
 Created ary empty array
+
 > ruboty var array push one two three
 Undefined one
+
 > ruboty var array push ary one two three
 Push one to ary
 Push two to ary
 Push three to ary
+
 > ruboty var array remove ary one two
-ary already included one
-ary already included two
+Remove one from ary
+Remove two from ary
+
 > ruboty var list
 key   type    value
-ary - array - ["one", "two", "three"]
+ary - array - ["three"]
 ~~~
 
 ## ENV
